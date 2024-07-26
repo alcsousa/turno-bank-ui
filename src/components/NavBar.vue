@@ -18,7 +18,7 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <header class="lg:px-16 px-4 bg-white flex flex-wrap items-center py-4 shadow-md mb-1.5">
+  <header class="lg:px-16 px-4 bg-white flex flex-wrap items-center py-4 shadow-md">
     <div class="flex-1 flex justify-between items-center">
       <a href="#" class="text-xl">TurnoBank</a>
     </div>
@@ -42,6 +42,7 @@ const handleLogout = () => {
           </template>
           <template v-else>
             <li><RouterLink to="/dashboard" class="md:p-4 py-3 px-0 block">Dashboard</RouterLink></li>
+            <li><RouterLink to="/checks" class="md:p-4 py-3 px-0 block">Checks</RouterLink></li>
             <li><a href="#" class="md:p-4 py-3 px-0 block" @click="handleLogout">Logout</a></li>
           </template>
         </ul>
