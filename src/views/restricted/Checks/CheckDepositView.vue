@@ -4,20 +4,20 @@ import DangerAlert from "@/components/alerts/DangerAlert.vue";
 import PrimaryButton from "@/components/ui/buttons/PrimaryButton.vue";
 import {ref} from "vue";
 import CurrencyInput from "@/components/ui/form/CurrencyInput.vue";
-import {depositCheck} from "@/api/checks.js";
 import {useRouter} from "vue-router";
+import {useCheckService} from "@/services/checkService.js";
 
 const router = useRouter()
 const error = ref('')
 const form = ref({
   amount: 0,
-  description: null,
+  description: '',
   image: null
 })
+const { depositCheck } = useCheckService()
 
 const handleSubmit = async () => {
   try {
-    console.log(form.value);
     await depositCheck(
         form.value.amount,
         form.value.description,
