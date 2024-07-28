@@ -6,7 +6,9 @@ import RoundedSpinner from "@/components/ui/spinners/RoundedSpinner.vue";
 import {onMounted, ref} from "vue";
 import {indexChecksByStatus} from "@/api/checks/admin/indexChecksByStatus.js";
 import AlternativeButton from "@/components/ui/buttons/AlternativeButton.vue";
+import {useRouter} from "vue-router";
 
+const router = useRouter()
 const checks = ref([])
 const error = ref(null)
 const loading = ref(false)
@@ -37,17 +39,24 @@ const fetchChecks = async () => {
   }
 }
 
+const handleTransactionClick = (transaction) => {
+  router.push({ name: 'checkControlDetail', params: { id: transaction.id } })
+}
+
 onMounted(() => {
   fetchChecks()
 })
 </script>
 
 <template>
-  <AuthenticatedLayout title="Admin Check Control">
+  <AuthenticatedLayout title="Check Control">
     <DangerAlert :error="error" />
     <RoundedSpinner :enabled="loading" />
 
-    <TransactionsList :transactions="checks" />
+    <TransactionsList
+        :transactions="checks"
+        :onItemClick="handleTransactionClick"
+    />
 
     <AlternativeButton
         text="Load more"

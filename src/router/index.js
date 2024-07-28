@@ -8,6 +8,7 @@ import {useAuthStore} from "@/stores/auth.js";
 import CheckHistoryView from "@/views/restricted/Checks/CheckHistoryView.vue";
 import CheckDepositView from "@/views/restricted/Checks/CheckDepositView.vue";
 import CheckControlListView from "@/views/restricted/Admin/CheckControlListView.vue";
+import CheckControlDetailView from "@/views/restricted/Admin/CheckControlDetailView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -58,6 +59,12 @@ const router = createRouter({
       path: '/admin/check-control',
       name: 'checkControlList',
       component: CheckControlListView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/admin/check-control/:id',
+      name: 'checkControlDetail',
+      component: CheckControlDetailView,
       meta: { requiresAuth: true }
     },
   ]
