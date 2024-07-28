@@ -43,6 +43,7 @@ const handleLogout = () => {
           <template v-else>
             <li><RouterLink to="/dashboard" class="md:p-4 py-3 px-0 block">Dashboard</RouterLink></li>
             <li><RouterLink to="/checks" class="md:p-4 py-3 px-0 block">Checks</RouterLink></li>
+            <li><RouterLink to="/admin/check-control" class="md:p-4 py-3 px-0 block">Admin</RouterLink></li>
             <li><a href="#" class="md:p-4 py-3 px-0 block" @click="handleLogout">Logout</a></li>
           </template>
         </ul>
