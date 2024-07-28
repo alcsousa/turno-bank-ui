@@ -1,7 +1,7 @@
 import {getCsrfCookie} from "@/api/csrf.js";
-import {storeCheck} from "@/api/checks.js";
+import {storeChecks} from "@/api/checks/storeChecks.js";
 
-export const useCheckService = () => {
+export const useDepositCheck = () => {
     const depositCheck = async (amount, description, image) => {
         let formData = new FormData()
         formData.append('amount', amount)
@@ -9,7 +9,7 @@ export const useCheckService = () => {
         formData.append('image', image)
 
         await getCsrfCookie()
-        await storeCheck(formData)
+        await storeChecks(formData)
     }
 
     return {

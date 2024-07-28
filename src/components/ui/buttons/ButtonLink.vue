@@ -14,7 +14,11 @@ defineProps({
 </script>
 
 <template>
-  <RouterLink :to="to" :class="buttonClass" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded uppercase">
+  <RouterLink
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded uppercase"
+      :to="to"
+      :class="buttonClass"
+  >
     <slot></slot>
   </RouterLink>
 </template>

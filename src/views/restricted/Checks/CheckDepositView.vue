@@ -5,7 +5,7 @@ import PrimaryButton from "@/components/ui/buttons/PrimaryButton.vue";
 import {ref} from "vue";
 import CurrencyInput from "@/components/ui/form/CurrencyInput.vue";
 import {useRouter} from "vue-router";
-import {useCheckService} from "@/services/checkService.js";
+import {useDepositCheck} from "@/services/checkService.js";
 
 const router = useRouter()
 const error = ref('')
@@ -14,7 +14,7 @@ const form = ref({
   description: '',
   image: null
 })
-const { depositCheck } = useCheckService()
+const { depositCheck } = useDepositCheck()
 
 const handleSubmit = async () => {
   try {
