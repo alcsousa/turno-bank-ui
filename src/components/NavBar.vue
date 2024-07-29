@@ -35,7 +35,6 @@ const handleLogout = () => {
       <nav>
         <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
           <li><RouterLink to="/" class="md:p-4 py-3 px-0 block">Home</RouterLink></li>
-          <li><RouterLink to="/about" class="md:p-4 py-3 px-0 block">About</RouterLink></li>
           <template v-if="!auth.isUserLoggedIn">
             <li><RouterLink to="/register" class="md:p-4 py-3 px-0 block">Register</RouterLink></li>
             <li><RouterLink to="/login" class="md:p-4 py-3 px-0 block">Login</RouterLink></li>

@@ -34,8 +34,11 @@ defineProps({
           {{ date }}
         </p>
       </div>
-      <div class="inline-flex items-center text-base font-semibold text-gray-900">
-        ${{ amount }}
+      <div :class="{
+        'inline-flex items-center text-base font-semibold text-gray-900': true,
+        'text-red-500': amount < 0
+      }">
+        {{ amount }} USD
       </div>
     </div>
   </li>
