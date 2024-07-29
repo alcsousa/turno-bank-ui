@@ -7,6 +7,7 @@ import {onMounted, ref} from "vue";
 import {indexChecksByStatus} from "@/api/checks/admin/indexChecksByStatus.js";
 import AlternativeButton from "@/components/ui/buttons/AlternativeButton.vue";
 import {useRouter} from "vue-router";
+import InfoAlert from "@/components/alerts/InfoAlert.vue";
 
 const router = useRouter()
 const checks = ref([])
@@ -14,10 +15,14 @@ const error = ref(null)
 const loading = ref(false)
 const currentPage = ref(1)
 const hasMorePages = ref(true)
+const hasHoverEffect = ref(true)
+
+const fetchPaginated = () => {
+  if (loading.value || !hasMorePages.value) return;
+  fetchChecks()
+}
 
 const fetchChecks = async () => {
-  if (loading.value || !hasMorePages.value) return;
-
   loading.value = true
   error.value = null
 
@@ -53,15 +58,25 @@ onMounted(() => {
     <DangerAlert :error="error" />
     <RoundedSpinner :enabled="loading" />
 
-    <TransactionsList
-        :transactions="checks"
-        :onItemClick="handleTransactionClick"
-    />
+    <div v-if="checks.length > 0">
+      <TransactionsList
+          :transactions="checks"
+          :onItemClick="handleTransactionClick"
+          :has-hover-effect="hasHoverEffect"
+      />
+    </div>
+    <div v-else>
+      <InfoAlert message="hooray! All pending checks were evaluated." />
+      <AlternativeButton
+          text="Fetch new checks"
+          @click.prevent="fetchChecks()"
+      />
+    </div>
 
     <AlternativeButton
         text="Load more"
         :enabled="!loading && hasMorePages"
-        @click.prevent="fetchChecks()"
+        @click.prevent="fetchPaginated()"
     />
   </AuthenticatedLayout>
 </template>

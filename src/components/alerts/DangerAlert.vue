@@ -2,6 +2,9 @@
 defineProps({
   error: {
     required: true
+  },
+  response: {
+    required: false
   }
 })
 </script>

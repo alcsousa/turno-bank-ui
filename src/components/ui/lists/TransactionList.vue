@@ -9,6 +9,11 @@ const props = defineProps({
   onItemClick: {
     type: Function,
     required: false
+  },
+  hasHoverEffect: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
@@ -27,6 +32,7 @@ const handleClick = (transaction) => {
           :description="transaction.description"
           :date="transaction.created_at"
           :amount="transaction.amount"
+          :has-hover-effect="props.hasHoverEffect"
           @click="handleClick(transaction)"
       />
     </ul>
