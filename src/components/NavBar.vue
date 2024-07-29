@@ -34,16 +34,19 @@ const handleLogout = () => {
     <div :class="{hidden: !showMobileMenu}" class="md:flex md:items-center md:w-auto w-full" id="menu">
       <nav>
         <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-          <li><RouterLink to="/" class="md:p-4 py-3 px-0 block">Home</RouterLink></li>
           <template v-if="!auth.isUserLoggedIn">
             <li><RouterLink to="/register" class="md:p-4 py-3 px-0 block">Register</RouterLink></li>
             <li><RouterLink to="/login" class="md:p-4 py-3 px-0 block">Login</RouterLink></li>
           </template>
           <template v-else>
-            <li><RouterLink to="/dashboard" class="md:p-4 py-3 px-0 block">Dashboard</RouterLink></li>
-            <li><RouterLink to="/checks" class="md:p-4 py-3 px-0 block">Checks</RouterLink></li>
-            <li><RouterLink to="/purchase" class="md:p-4 py-3 px-0 block">Purchase</RouterLink></li>
-            <li><RouterLink to="/admin/check-control" class="md:p-4 py-3 px-0 block">Admin</RouterLink></li>
+            <template v-if="!auth.isAdminUser">
+              <li><RouterLink to="/dashboard" class="md:p-4 py-3 px-0 block">Dashboard</RouterLink></li>
+              <li><RouterLink to="/checks" class="md:p-4 py-3 px-0 block">Checks</RouterLink></li>
+              <li><RouterLink to="/purchase" class="md:p-4 py-3 px-0 block">Purchase</RouterLink></li>
+            </template>
+            <template v-else>
+              <li><RouterLink to="/admin/check-control" class="md:p-4 py-3 px-0 block">Control</RouterLink></li>
+            </template>
             <li><a href="#" class="md:p-4 py-3 px-0 block" @click="handleLogout">Logout</a></li>
           </template>
         </ul>

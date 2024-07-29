@@ -48,6 +48,13 @@ const handleTransactionClick = (transaction) => {
   router.push({ name: 'checkControlDetail', params: { id: transaction.id } })
 }
 
+const reloadData = () => {
+  checks.value = []
+  currentPage.value = 1
+  hasMorePages.value = true
+  fetchChecks()
+}
+
 onMounted(() => {
   fetchChecks()
 })
@@ -59,6 +66,10 @@ onMounted(() => {
     <RoundedSpinner :enabled="loading" />
 
     <div v-if="checks.length > 0">
+      <AlternativeButton
+          text="Refresh"
+          @click.prevent="reloadData()"
+      />
       <TransactionsList
           :transactions="checks"
           :onItemClick="handleTransactionClick"

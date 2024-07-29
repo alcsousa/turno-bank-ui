@@ -5,6 +5,7 @@ import {useRouter} from "vue-router";
 import DangerAlert from "@/components/alerts/DangerAlert.vue";
 import BaseHeading3 from "@/components/ui/headings/BaseHeading3.vue";
 import {useAuthService} from "@/services/authService.js";
+import {useAuthStore} from "@/stores/auth.js";
 
 const router = useRouter()
 const { loginUser } = useAuthService()
@@ -17,7 +18,7 @@ const form = ref({
 const handleSubmit = async () => {
   try {
     await loginUser(form.value.email, form.value.password)
-    await router.push({ name: 'dashboard' })
+    await router.push({ name: useAuthStore().isAdminUser ? 'checkControlList' : 'dashboard' })
   } catch (err) {
     error.value = err
   }

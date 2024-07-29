@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import RegisterView from "@/views/RegisterView.vue";
 import LoginView from "@/views/LoginView.vue";
 import DashboardView from "@/views/restricted/DashboardView.vue";
@@ -16,62 +15,65 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
-      meta: { requiresAuth: false }
+      component: LoginView,
+      meta: { requiresAuth: false, requiresAdmin: false }
     },
     {
       path: '/register',
       name: 'register',
       component: RegisterView,
-      meta: { requiresAuth: false }
+      meta: { requiresAuth: false, requiresAdmin: false }
     },
     {
       path: '/login',
       name: 'login',
       component: LoginView,
-      meta: { requiresAuth: false }
+      meta: { requiresAuth: false, requiresAdmin: false }
     },
     {
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, requiresAdmin: false }
     },
     {
       path: '/checks',
       name: 'checkHistory',
       component: CheckHistoryView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, requiresAdmin: false }
     },
     {
       path: '/check/deposit',
       name: 'checkDeposit',
       component: CheckDepositView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, requiresAdmin: false }
     },
     {
       path: '/purchase',
       name: 'purchase',
       component: PurchaseView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, requiresAdmin: false }
     },
     {
       path: '/admin/check-control',
       name: 'checkControlList',
       component: CheckControlListView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, requiresAdmin: true }
     },
     {
       path: '/admin/check-control/:id',
       name: 'checkControlDetail',
       component: CheckControlDetailView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, requiresAdmin: true }
     },
   ]
 })
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !useAuthStore().isUserLoggedIn) {
+    next({ name: 'login' })
+  } else if (
+      to.meta.requiresAdmin && !useAuthStore().isAdminUser) {
     next({ name: 'login' })
   } else {
     next()

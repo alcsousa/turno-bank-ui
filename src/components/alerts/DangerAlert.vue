@@ -17,7 +17,7 @@ defineProps({
       </li>
     </ul>
     <div v-else>
-      {{ error.message }}
+      {{ error.response.data.message }}
     </div>
   </div>
 </template>

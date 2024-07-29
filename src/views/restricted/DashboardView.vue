@@ -63,9 +63,16 @@ const fetchAccount = async () => {
   }
 }
 
-onMounted(() => {
+const reloadData = () => {
+  transactions.value = []
+  currentPage.value = 1
+  hasMorePages.value = true
   fetchTransactions()
   fetchAccount()
+}
+
+onMounted(() => {
+  reloadData()
 })
 </script>
 
@@ -93,6 +100,10 @@ onMounted(() => {
     <BaseHeading3 title="Transactions" />
 
     <div v-if="transactions.length > 0">
+      <AlternativeButton
+          text="Refresh"
+          @click.prevent="reloadData()"
+      />
       <TransactionsList :transactions="transactions" />
     </div>
     <div v-else>
