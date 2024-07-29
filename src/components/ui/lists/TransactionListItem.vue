@@ -1,4 +1,6 @@
 <script setup>
+import {formatCurrency} from "@/utils/currency.js";
+
 defineProps({
   description: {
     type: String,
@@ -38,7 +40,7 @@ defineProps({
         'inline-flex items-center text-base font-semibold text-gray-900': true,
         'text-red-500': amount < 0
       }">
-        {{ amount }} USD
+        {{ formatCurrency(amount) }}
       </div>
     </div>
   </li>

@@ -10,6 +10,7 @@ import {indexTransactions} from "@/api/transactions/indexTransactions.js";
 import BaseHeading3 from "@/components/ui/headings/BaseHeading3.vue";
 import {getAccount} from "@/api/account/getAccount.js";
 import AlternativeButton from "@/components/ui/buttons/AlternativeButton.vue";
+import {formatCurrency} from "@/utils/currency.js";
 
 const auth = useAuthStore()
 
@@ -84,7 +85,7 @@ onMounted(() => {
       <div class="bg-blue-500 text-white w-full p-5 rounded-md shadow flex-1">
         <div>Current balance</div>
         <div class="text-base font-semibold text-2xl">
-          {{ currentBalance }} USD
+          {{ formatCurrency(currentBalance) }}
         </div>
       </div>
     </div>
