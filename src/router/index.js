@@ -9,6 +9,7 @@ import CheckHistoryView from "@/views/restricted/Checks/CheckHistoryView.vue";
 import CheckDepositView from "@/views/restricted/Checks/CheckDepositView.vue";
 import CheckControlListView from "@/views/restricted/Admin/CheckControlListView.vue";
 import CheckControlDetailView from "@/views/restricted/Admin/CheckControlDetailView.vue";
+import PurchaseView from "@/views/restricted/Purchase/PurchaseView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,12 @@ const router = createRouter({
       path: '/check/deposit',
       name: 'checkDeposit',
       component: CheckDepositView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/purchase',
+      name: 'purchase',
+      component: PurchaseView,
       meta: { requiresAuth: true }
     },
     {
